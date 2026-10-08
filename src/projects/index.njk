@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: Projects
+---
+<h1>Projects</h1>
+<p>A running feed of things I have built, newest first.</p>
+
+<div class="feed">
+{%- for project in collections.projects | reverse %}
+<article class="feed-item">
+  <h2><a href="{{ project.url }}">{{ project.data.title }}</a></h2>
+  <p class="meta">
+    <time datetime="{{ project.date | dateIso }}">{{ project.date | dateReadable }}</time>
+    {%- if project.data.stack %} | {{ project.data.stack }}{% endif %}
+  </p>
+  {%- if project.data.summary %}<p>{{ project.data.summary }}</p>{% endif %}
+  <p><a class="btn" href="{{ project.url }}">read more &rarr;</a></p>
+</article>
+{%- else %}
+<p>No projects yet.</p>
+{%- endfor %}
+</div>

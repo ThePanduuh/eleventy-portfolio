@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+<h1>{{ site.name }}</h1>
+<p class="lede">{{ site.tagline }}</p>
+
+<p>Welcome. This is my corner of the web. Here is what you can find:</p>
+
+<ul class="cards">
+  <li><a class="card" href="/about/"><strong>about</strong><span>Who I am and what I am into.</span></a></li>
+  <li><a class="card" href="/projects/"><strong>projects</strong><span>Things I built, newest first.</span></a></li>
+  <li><a class="card" href="/blog/"><strong>blog</strong><span>Longer thoughts and rambling.</span></a></li>
+  <li><a class="card" href="/resume/"><strong>resume</strong><span>The professional version.</span></a></li>
+  <li><a class="card" href="/contact/"><strong>contact</strong><span>Email and where else to find me.</span></a></li>
+</ul>
+
+<h2>Latest posts</h2>
+<ul class="entries">
+{%- for post in collections.blog | reverse | limit(3) %}
+  <li><time datetime="{{ post.date | dateIso }}">{{ post.date | dateIso }}</time> <a href="{{ post.url }}">{{ post.data.title }}</a></li>
+{%- else %}
+  <li>Nothing posted yet.</li>
+{%- endfor %}
+</ul>

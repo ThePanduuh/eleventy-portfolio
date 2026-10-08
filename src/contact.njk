@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+title: Contact
+---
+<h1>Contact</h1>
+<p>Email is best. I read everything, though replies can be slow.</p>
+
+<dl class="contact">
+{%- for link in site.links %}
+  <dt>{{ link.label }}</dt>
+  <dd><a href="{{ link.url }}">{{ link.text }}</a></dd>
+{%- endfor %}
+</dl>

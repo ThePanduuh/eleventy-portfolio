@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} - {% endif %}{{ site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <script>
+    // Theme: dark by default; the visitor's choice is remembered.
+    (function () {
+      var t = "dark";
+      try { t = localStorage.getItem("theme") || "dark"; } catch (e) {}
+      document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-section="{{ page.url.split('/')[1] or 'home' }}">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <aside class="side">
+      <div class="side-head">
+        <p class="site-name"><a href="/">{{ site.name }}</a></p>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav"><span class="burger" aria-hidden="true"></span><span>menu</span></button>
+      </div>
+      <p class="tag">{{ site.tagline }}</p>
+      <nav id="site-nav" aria-label="Main">
+        <ul>
+        {%- for item in site.nav %}
+          <li><a href="{{ item.url }}"{% if page.url == item.url or (item.url != "/" and page.url.startsWith(item.url)) %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+        </ul>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="true" hidden>[x] dark mode</button>
+      </nav>
+      <p class="side-mail"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    </aside>
+    <main id="main" class="panel">
+      <nav class="titlebar" aria-label="Breadcrumb">
+        {%- for crumb in page.url | breadcrumbs(site.name) %}
+        <a href="{{ crumb.url }}"{% if loop.last %} aria-current="page"{% endif %}>{{ crumb.label }}</a>
+        {%- endfor %}
+      </nav>
+      <div class="content">
+        {{ content | safe }}
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; {{ site.name }}. Plain HTML, built with Eleventy.</p>
+  </footer>
+  <script>
+    (function () {
+      var btn = document.getElementById("theme-toggle");
+      if (!btn) return;
+      var root = document.documentElement;
+      function paint() {
+        var dark = root.dataset.theme !== "light";
+        btn.setAttribute("aria-pressed", dark);
+        btn.textContent = (dark ? "[x]" : "[ ]") + " dark mode";
+      }
+      btn.hidden = false;
+      paint();
+      btn.addEventListener("click", function () {
+        var next = root.dataset.theme === "light" ? "dark" : "light";
+        root.dataset.theme = next;
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        paint();
+      });
+    })();
+  </script>
+  <script>
+    // Burger menu (phones only; on desktop the nav is always visible)
+    (function () {
+      var btn = document.getElementById("menu-toggle");
+      var nav = document.getElementById("site-nav");
+      if (!btn || !nav) return;
+      function set(open) {
+        nav.classList.toggle("open", open);
+        btn.setAttribute("aria-expanded", open);
+      }
+      btn.addEventListener("click", function () { set(!nav.classList.contains("open")); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && nav.classList.contains("open")) { set(false); btn.focus(); }
+      });
+    })();
+  </script>
+</body>
+</html>

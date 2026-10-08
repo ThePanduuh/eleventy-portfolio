@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+title: Blog
+---
+<h1>Blog</h1>
+<p>Rambling, notes, and half-formed ideas.</p>
+
+<ul class="entries">
+{%- for post in collections.blog | reverse %}
+  <li>
+    <time datetime="{{ post.date | dateIso }}">{{ post.date | dateIso }}</time>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+    {%- if post.data.summary %}<br><span class="meta">{{ post.data.summary }}</span>{% endif %}
+  </li>
+{%- else %}
+  <li>No posts yet.</li>
+{%- endfor %}
+</ul>

@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+---
+<article>
+  <h1>{{ title }}</h1>
+  <p class="meta">
+    <time datetime="{{ page.date | dateIso }}">{{ page.date | dateReadable }}</time>
+    {%- if stack %} | {{ stack }}{% endif %}
+  </p>
+  {% if repo or demo %}
+  <p class="meta">
+    {% if repo %}<a href="{{ repo }}">source</a>{% endif %}
+    {% if repo and demo %} | {% endif %}
+    {% if demo %}<a href="{{ demo }}">live demo</a>{% endif %}
+  </p>
+  {% endif %}
+  {{ content | safe }}
+</article>
+{% if 'projects' in tags %}
+<p><a class="btn" href="/projects/">&larr; back to projects</a></p>
+{% else %}
+<p><a class="btn" href="/blog/">&larr; back to blog</a></p>
+{% endif %}
