@@ -1,0 +1,204 @@
+/* 90s plain-text look, modern behavior.
+   Colors live in :root. Section colors (nav buttons + breadcrumb bar) are the --d-* values. */
+:root {
+  --page: #008080;      /* desktop behind the window (classic teal) */
+  --desk-fg: #ffffff;   /* text sitting directly on the desktop */
+  --panel: #ffffff;     /* the window */
+  --fg: #111111;
+  --muted: #555555;
+  --link: #800000;
+  --visited: #6b3a6b;
+  --hover: #e9e4dc;     /* hover highlight on links and cards */
+  --rule: #8a8a8a;
+  --edge: #111111;      /* window border + hard shadow */
+  --face: #e6e2d8;      /* button face */
+  --bevel-hi: #ffffff;
+  --bevel-lo: #8c887e;
+  --nav-mix: 18%;       /* strength of a nav button's hover tint */
+
+  /* one color per section; white text sits on each */
+  --d-home: #000080;     /* navy */
+  --d-about: #800080;    /* purple */
+  --d-projects: #008080; /* teal */
+  --d-blog: #b34700;     /* burnt orange */
+  --d-resume: #800000;   /* maroon */
+  --d-contact: #404040;  /* charcoal */
+
+  --font: "Courier New", Courier, ui-monospace, monospace;
+  --shell: 76rem;       /* max total width on desktop */
+  --side: 15rem;
+}
+:root { color-scheme: light; }
+/* Dark is the default. A script in <head> sets data-theme="light" if the visitor chose light. */
+:root:not([data-theme="light"]) {
+  color-scheme: dark;
+  --page: #0a2e2e; --desk-fg: #dcdcdc;
+  --panel: #1e1c1a; --fg: #dcdcdc; --muted: #bcbcbc;
+  --link: #ff9a9a; --visited: #d6aadf; --hover: #3a3532;
+  --rule: #555555; --edge: #000000;
+  --face: #2e2b28; --bevel-hi: #504b46; --bevel-lo: #0d0c0b;
+  --nav-mix: 30%;
+  --d-home: #2d2da8; --d-contact: #555555;  /* the light originals vanish on dark */
+}
+
+/* <body data-section="..."> is set in base.njk */
+body { --sec: var(--d-home); }
+body[data-section="about"]    { --sec: var(--d-about); }
+body[data-section="projects"] { --sec: var(--d-projects); }
+body[data-section="blog"]     { --sec: var(--d-blog); }
+body[data-section="resume"]   { --sec: var(--d-resume); }
+body[data-section="contact"]  { --sec: var(--d-contact); }
+
+* { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  padding: 1rem clamp(.75rem, 3vw, 2rem) 1rem;
+  background: var(--page);
+  color: var(--fg);
+  font: 1rem/1.6 var(--font);
+  overflow-wrap: break-word;
+}
+
+a { color: var(--link); text-decoration-thickness: 2px; text-underline-offset: .2em;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+a:visited { color: var(--visited); }
+a:hover { background: var(--hover); text-decoration-color: currentColor; }
+a:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+/* little arrow on links that leave the site */
+.content a[href^="http"]:not(.btn)::after { content: " \2197"; font-size: .85em; }
+
+/* ---- layout: stacked on phones, sidebar + window on desktop ---- */
+.shell { max-width: var(--shell); margin: 0 auto; display: grid; gap: 1.25rem; }
+@media (min-width: 52rem) {
+  .shell { grid-template-columns: var(--side) minmax(0, 1fr); align-items: start; gap: 2rem; }
+  .side { position: sticky; top: 1rem; }
+  body { padding-top: 2rem; }
+}
+
+/* ---- sidebar (sits on the desktop, so it uses --desk-fg) ---- */
+.side-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .4rem; }
+.site-name { font-size: 1.4rem; font-weight: bold; line-height: 1.2; margin: 0; }
+.site-name a, .site-name a:visited, .side-mail a, .side-mail a:visited { color: var(--desk-fg); }
+.site-name a { text-decoration: none; }
+.site-name a:hover, .side-mail a:hover { background: rgba(0,0,0,.25); }
+.tag { color: var(--desk-fg); font-size: .9rem; margin: 0 0 1rem; }
+.side-mail { font-size: .9rem; margin: 1rem 0 0; }
+
+/* nav buttons: each owns its section's color */
+.side ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.side li:nth-child(1) { --navd: var(--d-home); }
+.side li:nth-child(2) { --navd: var(--d-about); }
+.side li:nth-child(3) { --navd: var(--d-projects); }
+.side li:nth-child(4) { --navd: var(--d-blog); }
+.side li:nth-child(5) { --navd: var(--d-resume); }
+.side li:nth-child(6) { --navd: var(--d-contact); }
+.side nav a, .side nav a:visited, .btn, .btn:visited, .theme-toggle, .menu-toggle {
+  display: block; padding: .45rem .9rem; color: var(--fg); background: var(--face);
+  border: 2px solid; border-color: var(--bevel-hi) var(--bevel-lo) var(--bevel-lo) var(--bevel-hi);
+  outline: 1px solid var(--edge); text-decoration: none;
+}
+.btn:hover, .theme-toggle:hover { background: var(--hover); }
+.menu-toggle { display: none; font: inherit; font-size: .95rem; cursor: pointer; align-items: center; }
+.menu-toggle[aria-expanded="true"] { border-color: var(--bevel-lo) var(--bevel-hi) var(--bevel-hi) var(--bevel-lo); background: var(--hover); }
+/* three-bar burger icon drawn in CSS */
+.burger { position: relative; width: 1.1rem; height: 2px; margin-right: .6rem; background: currentColor; }
+.burger::before, .burger::after { content: ""; position: absolute; left: 0; width: 100%; height: 2px; background: currentColor; }
+.burger::before { top: -6px; }
+.burger::after { top: 6px; }
+.theme-toggle { font: inherit; font-size: .95rem; text-align: left; cursor: pointer; margin-top: .7rem; }
+.theme-toggle[hidden] { display: none; }
+/* hover = faint tint of the button's color; current page = solid color with white text */
+.side nav a:hover, .side nav a:visited:hover { background: color-mix(in srgb, var(--navd) var(--nav-mix), var(--face)); color: var(--fg); }
+.side nav a:active, .btn:active, .theme-toggle:active { border-color: var(--bevel-lo) var(--bevel-hi) var(--bevel-hi) var(--bevel-lo); padding: calc(.45rem + 1px) calc(.9rem - 1px) calc(.45rem - 1px) calc(.9rem + 1px); }
+.side nav a[aria-current="page"], .side nav a[aria-current="page"]:visited,
+.side nav a[aria-current="page"]:hover, .side nav a[aria-current="page"]:visited:hover {
+  background: var(--navd); color: #fff; font-weight: bold;
+  border-color: var(--bevel-lo) var(--bevel-hi) var(--bevel-hi) var(--bevel-lo);
+}
+.btn { display: inline-block; font-size: .95rem; }
+@media (min-width: 52rem) {
+  .side ul { flex-direction: column; gap: .7rem; }
+  .side nav a, .theme-toggle { text-align: left; width: 100%; }
+}
+@media (max-width: 51.99rem) {
+  .side-mail { display: none; }
+  /* with scripts on: collapse the nav behind a burger button, stack its buttons */
+  .js .menu-toggle { display: flex; }
+  .js .side nav:not(.open) { display: none; }
+  .js .side nav { margin-top: .75rem; }
+  .js .side ul { flex-direction: column; gap: .6rem; }
+  .js .side nav a, .js .theme-toggle { width: 100%; text-align: left; }
+}
+
+/* ---- the window ---- */
+.panel { background: var(--panel); border: 2px solid var(--edge); box-shadow: 6px 6px 0 var(--edge); min-width: 0; }
+/* breadcrumb path: colored bar, plain links, no borders */
+.titlebar { display: flex; flex-wrap: wrap; padding: .45rem .6rem; font-size: .85rem; color: #fff; background: var(--sec); }
+.titlebar a, .titlebar a:visited { color: #fff; text-decoration: none; padding: 0 .15rem; }
+.titlebar a::after { content: "/"; }
+.titlebar a:hover { background: rgba(0,0,0,.2); text-decoration: underline; }
+.titlebar a:focus-visible { outline-color: #fff; }
+.titlebar a[aria-current="page"] { font-weight: bold; }
+.content { padding: .5rem clamp(1rem, 3vw, 2.5rem) 2rem; }
+/* keep running text a readable length, let grids use the full width */
+.content > p, .content > ul:not(.cards):not(.entries), .content > ol,
+.content article > *, .content .item, .content > dl { max-width: 72ch; }
+
+h1, h2, h3 { line-height: 1.25; margin: 1.8em 0 .5em; }
+h1 { font-size: 1.7rem; margin-top: 1rem; padding-bottom: .4rem; border-bottom: 4px double var(--sec); }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+h2::before { content: "## "; color: var(--muted); }
+
+p, ul, ol, dl { margin: 0 0 1em; }
+ul, ol { padding-left: 1.5rem; }
+img, video { max-width: 100%; height: auto; }
+pre { overflow-x: auto; padding: .75rem; border: 1px solid var(--rule); background: var(--face); }
+code { font-family: inherit; }
+
+.lede { font-size: 1.15rem; }
+.meta { color: var(--muted); font-size: .9rem; margin: 0 0 .5rem; }
+
+/* ---- homepage cards + projects feed: plain boxes, one colored edge ---- */
+.cards, .feed { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+.cards { list-style: none; padding: 0; }
+.feed { grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); margin-top: 1.5rem; }
+.card, .feed-item {
+  display: block; height: 100%; padding: .9rem 1rem;
+  background: var(--panel); border: 2px solid var(--edge); border-left: 8px solid var(--sec);
+}
+.card:hover, .card:focus-visible, .feed-item:hover { background: var(--hover); box-shadow: 4px 4px 0 var(--edge); }
+.card, .card:visited { color: var(--fg); text-decoration: none; }
+.card strong { display: block; color: var(--link); text-decoration: underline; margin-bottom: .25rem; }
+.card span { color: var(--muted); font-size: .9rem; }
+.feed-item h2 { margin: 0 0 .25rem; font-size: 1.1rem; }
+.feed-item h2::before { content: ""; }
+.feed-item p:last-child { margin-bottom: 0; }
+
+/* ---- lists ---- */
+.entries { list-style: none; padding: 0; }
+.entries li { margin-bottom: .9rem; }
+.entries time { color: var(--muted); margin-right: .75rem; }
+.contact { display: grid; grid-template-columns: max-content 1fr; gap: .5rem 1.5rem; }
+.contact dt { font-weight: bold; }
+.contact dd { margin: 0; }
+.item { margin-bottom: 1.5rem; }
+.item h3 { margin-top: 1em; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 0; background: var(--panel); color: var(--fg); padding: .5rem; z-index: 10; }
+::selection { background: var(--sec); color: #fff; }
+footer { max-width: var(--shell); margin: 1.5rem auto 0; color: var(--desk-fg); font-size: .85rem; }
+
+@media (max-width: 34rem) {
+  .contact { grid-template-columns: 1fr; gap: 0; }
+  .contact dd { margin-bottom: .9rem; }
+  .entries time { display: block; }
+  .panel { box-shadow: 4px 4px 0 var(--edge); }
+}
+@media print {
+  .side, .titlebar, .skip, footer { display: none; }
+  body { background: #fff; padding: 0; }
+  .panel { border: 0; box-shadow: none; }
+}

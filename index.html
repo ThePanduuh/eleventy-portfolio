@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - Your Name</title>
+  <meta name="description" content="Personal site: projects, writing, and resume.">
+  <script>
+    // Theme: dark by default; the visitor's choice is remembered.
+    (function () {
+      var t = "dark";
+      try { t = localStorage.getItem("theme") || "dark"; } catch (e) {}
+      document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-section="home">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <aside class="side">
+      <div class="side-head">
+        <p class="site-name"><a href="/">Your Name</a></p>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav"><span class="burger" aria-hidden="true"></span><span>menu</span></button>
+      </div>
+      <p class="tag">Tinkerer. I build things and write about them.</p>
+      <nav id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/" aria-current="page">home</a></li>
+          <li><a href="/about/">about</a></li>
+          <li><a href="/projects/">projects</a></li>
+          <li><a href="/blog/">blog</a></li>
+          <li><a href="/resume/">resume</a></li>
+          <li><a href="/contact/">contact</a></li>
+        </ul>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="true" hidden>[x] dark mode</button>
+      </nav>
+      <p class="side-mail"><a href="mailto:you@example.com">you@example.com</a></p>
+    </aside>
+    <main id="main" class="panel">
+      <nav class="titlebar" aria-label="Breadcrumb">
+        <a href="/" aria-current="page">yourname</a>
+      </nav>
+      <div class="content">
+        <h1>Your Name</h1>
+<p class="lede">Tinkerer. I build things and write about them.</p>
+
+<p>Welcome. This is my corner of the web. Here is what you can find:</p>
+
+<ul class="cards">
+  <li><a class="card" href="/about/"><strong>about</strong><span>Who I am and what I am into.</span></a></li>
+  <li><a class="card" href="/projects/"><strong>projects</strong><span>Things I built, newest first.</span></a></li>
+  <li><a class="card" href="/blog/"><strong>blog</strong><span>Longer thoughts and rambling.</span></a></li>
+  <li><a class="card" href="/resume/"><strong>resume</strong><span>The professional version.</span></a></li>
+  <li><a class="card" href="/contact/"><strong>contact</strong><span>Email and where else to find me.</span></a></li>
+</ul>
+
+<h2>Latest posts</h2>
+<ul class="entries">
+  <li><time datetime="2026-10-02">2026-10-02</time> <a href="/blog/first-post/">Hello, world</a></li>
+</ul>
+
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; Your Name. Plain HTML, built with Eleventy.</p>
+  </footer>
+  <script>
+    (function () {
+      var btn = document.getElementById("theme-toggle");
+      if (!btn) return;
+      var root = document.documentElement;
+      function paint() {
+        var dark = root.dataset.theme !== "light";
+        btn.setAttribute("aria-pressed", dark);
+        btn.textContent = (dark ? "[x]" : "[ ]") + " dark mode";
+      }
+      btn.hidden = false;
+      paint();
+      btn.addEventListener("click", function () {
+        var next = root.dataset.theme === "light" ? "dark" : "light";
+        root.dataset.theme = next;
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        paint();
+      });
+    })();
+  </script>
+  <script>
+    // Burger menu (phones only; on desktop the nav is always visible)
+    (function () {
+      var btn = document.getElementById("menu-toggle");
+      var nav = document.getElementById("site-nav");
+      if (!btn || !nav) return;
+      function set(open) {
+        nav.classList.toggle("open", open);
+        btn.setAttribute("aria-expanded", open);
+      }
+      btn.addEventListener("click", function () { set(!nav.classList.contains("open")); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && nav.classList.contains("open")) { set(false); btn.focus(); }
+      });
+    })();
+  </script>
+</body>
+</html>
