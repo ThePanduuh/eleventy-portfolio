@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About - Your Name</title>
-  <meta name="description" content="Personal site: projects, writing, and resume.">
+  <title>about - Joseph DiFeo</title>
+  <meta name="description" content="Personal website: Resume, projects, rambling.">
   <script>
     // Theme: dark by default; the visitor's choice is remembered.
     (function () {
@@ -18,13 +18,19 @@
 </head>
 <body data-section="about">
   <a class="skip" href="#main">Skip to content</a>
+  <div class="banner">
+    <p><img src="/images/cone.gif" alt="(flashing traffic cone)" style="width: auto; height:2em; vertical-align: bottom"></img> 
+    Thanks for stopping by! This website is under construction, please excuse the mess!
+    <img src="/images/cone.gif" alt="(flashing traffic cone)" style="width: auto; height:2em; vertical-align: bottom">
+    </p>
+  </div>
   <div class="shell">
     <aside class="side">
       <div class="side-head">
-        <p class="site-name"><a href="/">Your Name</a></p>
+        <p class="site-name"><a href="/">Joseph DiFeo</a></p>
         <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav"><span class="burger" aria-hidden="true"></span><span>menu</span></button>
       </div>
-      <p class="tag">Tinkerer. I build things and write about them.</p>
+      <p class="tag">Professional Tinkerer</p>
       <nav id="site-nav" aria-label="Main">
         <ul>
           <li><a href="/">home</a></li>
@@ -36,36 +42,85 @@
         </ul>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="true" hidden>[x] dark mode</button>
       </nav>
-      <p class="side-mail"><a href="mailto:you@example.com">you@example.com</a></p>
+      <p class="side-mail"><a href="mailto:josephpdifeo@gmail.com">josephpdifeo@gmail.com</a></p>
     </aside>
     <main id="main" class="panel">
       <nav class="titlebar" aria-label="Breadcrumb">
-        <a href="/">yourname</a>
+        <a href="/">josephdifeo</a>
         <a href="/about/" aria-current="page">about</a>
       </nav>
       <div class="content">
-        <h1>About</h1>
+        <h1>about</h1>
 
-<p>Hi, I'm Your Name. Write two or three plain sentences here about what you do and what you like making.</p>
+<p>Hello, my name is Joe.</p>
+
+<p>For as long as I can remember, I have had an interest in taking things apart, figuring out how they work, and putting them back together.
+It started with Nerf guns as a kid, then grew into DIY electronics projects in high school, and then cars when I was old enough to drive.</p>
+
+<p>Since I was born at a time when technology was less prevalent, I had a lot of interest in that as well.
+But I did not like the idea of sitting behind a computer all day for a job. I enjoyed working with my hands too much.
+</p>
+<p>That's what makes my skills unique. Rebuilding a pump, troubleshooting a die set, replacing a motor? Sure.
+Problems with automated equipment; PLC, sensors, solenoids? Sure.</p>
 
 <h2>What I work on</h2>
 <ul>
-  <li>Topic or skill one</li>
-  <li>Topic or skill two</li>
-  <li>Topic or skill three</li>
+  <li>Automated equipment
+    <ul>
+    <li>Complete rehabilitation to fine tuning</li>
+    <li>Using Allen Bradley/Rockwell PLC devices</li>
+    <li>Fanuc robots</li>
+    <li>Occasional Cognex vision systems</li>
+    </ul>
+  <li>Tooling
+    <ul>
+    <li>Troubleshooting, maintaining, cleaning, and sharpening stamping dies used to manufacture lithium thionyl chloride batteries</li>
+    <li>Designing new parts to upgrade or retrofit older equipment</li>
+    <li>Designing hard gauges for part or subassembly inspection</li>
+    </ul>
+  <li>Laser Welding
+    <ul>
+    <li>Weld schedule development</li>
+    <li>weld cross-sectioning, preparation, and penetration measurement</li>
+    <li>Nd:YAG laser maintenance and repair (LASAG)</li>
+    <li>Hermeticity testing using helium mass spectrometer leak detectors</li>
+    </ul>
+  <li>CAD
+    <ul>
+    <li>Solidworks, primarily</li>
+    <li>AutoCAD</li>
+    <li>Autodesk Fusion/Fusion360, for home projects</li>
+    <li>Autodesk Inventor, in high school, but all CAD programs are very similar</li>
+    </ul> 
+  <li>Python
+    <ul>
+    <li>Wrote scripts utilizing Pandas and MatPlotLib to filter, analyze, generate graphs, and compile results for battery runtime test data, recorded
+    using an oscilloscope, and using a custom LabVIEW data acquisition system</li>
+    </ul>
 </ul>
 
 <h2>Outside of work</h2>
-<p>Hobbies, tinkering, whatever you want people to know.</p>
+<p>Hobbies, interests, etc.</p>
+<ul>
+  <li>3D Printing; fused deposition modeling (FDM), using PLA, PETG, ASA, ASA-CF filaments</li>
+  <li>Autocross, with <a href="https://www.phillyscca.com" target="_blank">Philly SCCA</a> mostly</li>
+  <li>Self-Hosting/NAS; DIY network attached storage (NAS) running <a href="https://unraid.net" target="_blank">Unraid</a>, which serves as my home file storage system,
+   as well as running <a href="https://www.home-assistant.io/" target="_blank">Home Assistant</a> VM, and several other Docker containers</li>
+  <li>Smart home projects using Home Assistant VM, Zigbee devices, Z-Wave devices, and making custom devices using ESP32's and ESPHome</li>
+  <li>Photography; digital and film</li>
+  <li>Fixing lawnmowers, weedwackers, snowblowers, anything that has a carburetor</li>
+  <li>Modifying, fixing, working on cars in general</li>
+  <li>Mechanical keyboards, which lead to keyboard design, PCB design, soldering, silicone molding, and resin casting</li>
+</ul>
 
 <h2>This site</h2>
-<p>Hand-written HTML and CSS, built with Eleventy. No frameworks, no trackers.</p>
+<p>Utilized Claude AI to make the template through several iterations. Plain HTML and CSS. Built with Eleventy. No frameworks, no trackers, no CDNs.</p>
 
       </div>
     </main>
   </div>
   <footer>
-    <p>&copy; Your Name. Plain HTML, built with Eleventy.</p>
+    <p>&copy; Joseph DiFeo. Built with <a href="https://11ty.dev" target="_blank">Eleventy.</a></p>
   </footer>
   <script>
     (function () {
