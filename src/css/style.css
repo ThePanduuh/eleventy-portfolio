@@ -48,6 +48,18 @@ body[data-section="projects"] { --sec: var(--d-projects); }
 body[data-section="blog"]     { --sec: var(--d-blog); }
 body[data-section="resume"]   { --sec: var(--d-resume); }
 body[data-section="contact"]  { --sec: var(--d-contact); }
+.banner{
+  background-color: #ff7206;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+  max-width: var(--shell);
+  margin: 0 auto 1.25rem;
+  padding: .2rem;
+}
+.banner p {
+  padding-top: .5rem;
+}
 
 * { box-sizing: border-box; }
 html { font-size: 100%; -webkit-text-size-adjust: 100%; }
@@ -157,7 +169,7 @@ img, video { max-width: 100%; height: auto; }
 pre { overflow-x: auto; padding: .75rem; border: 1px solid var(--rule); background: var(--face); }
 code { font-family: inherit; }
 
-.lede { font-size: 1.15rem; }
+.lead { font-size: 1.15rem; }
 .meta { color: var(--muted); font-size: .9rem; margin: 0 0 .5rem; }
 
 /* ---- homepage cards + projects feed: plain boxes, one colored edge ---- */

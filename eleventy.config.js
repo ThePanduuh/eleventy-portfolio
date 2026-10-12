@@ -22,9 +22,10 @@ module.exports = function (eleventyConfig) {
   });
   // {{ list | limit(3) }} -> first 3 items
   eleventyConfig.addFilter("limit", (arr, n) => arr.slice(0, n));
+  eleventyConfig.addPassthroughCopy("src/images");
 
   return {
-    dir: { input: "src", output: "_site", includes: "_includes", data: "_data" },
+    dir: { input: "src", output: "public", includes: "_includes", data: "_data" },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
   };

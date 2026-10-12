@@ -1,9 +1,9 @@
 // Edit this file: it feeds every page.
 module.exports = {
-  name: "Your Name",
-  tagline: "Tinkerer. I build things and write about them.",
-  description: "Personal site: projects, writing, and resume.",
-  email: "you@example.com",
+  name: "Joseph DiFeo",
+  tagline: "Professional Tinkerer",
+  description: "Personal website: Resume, projects, rambling.",
+  email: "josephpdifeo@gmail.com",
   nav: [
     { label: "home", url: "/" },
     { label: "about", url: "/about/" },
@@ -13,9 +13,12 @@ module.exports = {
     { label: "contact", url: "/contact/" },
   ],
   links: [
-    { label: "Email", url: "mailto:you@example.com", text: "you@example.com" },
-    { label: "LinkedIn", url: "https://www.linkedin.com/in/your-handle", text: "linkedin.com/in/your-handle" },
-    { label: "GitHub", url: "https://github.com/your-handle", text: "github.com/your-handle" },
-    // add Mastodon, Bluesky, itch.io, etc.
+    { label: "Email", url: "mailto:josephpdifeo@gmail.com", text: "josephpdifeo@gmail.com" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/joseph-difeo-212937172", text: "@Joseph DiFeo" },
+    { label: "GitHub", url: "https://github.com/thepanduuh", text: "@ThePanduuh" },
+    { label: "Flickr", url: "https://www.flickr.com/photos/158370277@N06/", text: "@Joseph DiFeo"},
+    { label: "Printables", url: "https://www.printables.com/@thepanduuh_3995808", text: "@ThePanduuh"},
+    { label: "Makerworld", url: "https://makerworld.com/en/@thepanduuh", text: "@ThePanduuh"},
+    
   ],
 };

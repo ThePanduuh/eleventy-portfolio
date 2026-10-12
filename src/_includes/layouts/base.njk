@@ -18,6 +18,12 @@
 </head>
 <body data-section="{{ page.url.split('/')[1] or 'home' }}">
   <a class="skip" href="#main">Skip to content</a>
+  <div class="banner">
+    <p><img src="/images/cone.gif" alt="(flashing traffic cone)" style="width: auto; height:2em; vertical-align: bottom"></img> 
+    Thanks for stopping by! This website is under construction, please excuse the mess!
+    <img src="/images/cone.gif" alt="(flashing traffic cone)" style="width: auto; height:2em; vertical-align: bottom">
+    </p>
+  </div>
   <div class="shell">
     <aside class="side">
       <div class="side-head">
@@ -47,7 +53,7 @@
     </main>
   </div>
   <footer>
-    <p>&copy; {{ site.name }}. Plain HTML, built with Eleventy.</p>
+    <p>&copy; {{ site.name }}. Built with <a href="https://11ty.dev" target="_blank">Eleventy.</a></p>
   </footer>
   <script>
     (function () {
