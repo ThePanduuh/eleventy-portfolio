@@ -5,17 +5,18 @@ title: home
 <h1>{{ site.name }}</h1>
 <p class="lead">{{ site.tagline }}</p>
 
-<p>Welcome! This is my corner of the web. Here is what you can find:</p>
+<p>Thanks for stopping by!</p>
+<p>Welcome to my little corner of the internet. Where do you want to start?</p>
 
 <ul class="cards">
-  <li><a class="card" href="/about/"><strong>about</strong><span>a little about me and what I like to do</span></a></li>
-  <li><a class="card" href="/projects/"><strong>projects</strong><span>things I've built, newest first</span></a></li>
+  <li><a class="card" href="/about/"><strong>about</strong><span>a bit about me and what I do, for work and for fun</span></a></li>
+  <li><a class="card" href="/projects/"><strong>projects</strong><span>things I've built/made</span></a></li>
   <li><a class="card" href="/blog/"><strong>blog</strong><span>longer form thoughts (rambling)</span></a></li>
   <li><a class="card" href="/resume/"><strong>resume</strong><span>the professional page</span></a></li>
-  <li><a class="card" href="/contact/"><strong>contact</strong><span>email, and other places to find me</span></a></li>
+  <li><a class="card" href="/contact/"><strong>contact</strong><span>email, LinkedIn, and other places to find me</span></a></li>
 </ul>
 
-<h2>Latest posts</h2>
+<h2>Latest blog posts</h2>
 <ul class="entries">
 {%- for post in collections.blog | reverse | limit(3) %}
   <li><time datetime="{{ post.date | dateIso }}">{{ post.date | dateIso }}</time> <a href="{{ post.url }}">{{ post.data.title }}</a></li>
